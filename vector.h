@@ -122,6 +122,25 @@ public:
 		 	if (lo+i+inter/2 < size) merge(lo+i, lo+i+inter/2, size);
 		 }
 	}
+	Rank partition(Rank lo, Rank hi){
+		swap(_elem[lo], _elem[lo+rand(0, _elem.size())]);
+		ContentType pivot = _elem[lo];
+		hi=hi-1;
+		while(lo < hi){
+			if(_elem[hi]>pivot) hi--;
+			else _elem[lo++]=_elem[hi];
+			if((lo < hi) && (_elem[lo]<pivot)) lo++;
+			else _elem[hi--]=_elem[lo]
+		}
+		_elem[lo]=pivot;
+		return lo;
+	}
+	void quickSort(Rank lo, Rank hi){
+		Rank pos = partition(lo, hi);
+		quickSort(lo, pos);
+		quickSort(pos, hi);
+		merge(lo, pos, hi);
+	}
 	void heapSort(Rank lo, Rank hi){
 		complexHeap<ContentType> heap(_elem+lo, hi-lo);
 		int pivot = hi;
