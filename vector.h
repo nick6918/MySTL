@@ -30,7 +30,7 @@ public:
 	vector(vector<ContentType> const& other, Rank lo, Rank hi){
 		copyFrom(other._elem, lo, hi);
 	} 
-	~vector(){
+	virtual ~vector(){
 		delete[] _elem;
 	}
 	//基本接口
@@ -127,15 +127,16 @@ public:
 		ContentType pivot = _elem[lo];
 		hi=hi-1;
 		while(lo < hi){
-			if(_elem[hi]>pivot) hi--;
-			else _elem[lo++]=_elem[hi];
-			if((lo < hi) && (_elem[lo]<pivot)) lo++;
-			else _elem[hi--]=_elem[lo]
+			while(_elem[hi]>pivot) hi--;
+			if(lo<hi) _elem[lo++]=_elem[hi];
+			while((lo < hi) && (_elem[lo]<pivot)) lo++;
+			if(lo<hi) _elem[hi--]=_elem[lo]
 		}
 		_elem[lo]=pivot;
 		return lo;
 	}
 	void quickSort(Rank lo, Rank hi){
+		if (hi-lo==1) return;
 		Rank pos = partition(lo, hi);
 		quickSort(lo, pos);
 		quickSort(pos, hi);
@@ -143,10 +144,7 @@ public:
 	}
 	void heapSort(Rank lo, Rank hi){
 		complexHeap<ContentType> heap(_elem+lo, hi-lo);
-		int pivot = hi;
-		while(){
-
-		}
+		while(!heap.empty()) _elem[--hi] = heap.delmax();
 	}
 	//辅助函数
 	void copyFrom(ContentType const* other, Rank lo, Rank hi){

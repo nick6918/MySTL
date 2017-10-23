@@ -16,19 +16,19 @@ public:
 	}
 	void heapify(){
 		//floyd算法
-		for(int i=parent(_elem.size-1); i>=0; i--){
+		for(int i=parent(size-1); i>=0; i--){
 			sink(i);
 		}
 	}
 	//基本方法
 	Rank insert(ContentType elem){
-		_elem[_elem.size++]=elem;
+		_elem[size++]=elem;
 		Rank pos = swim(size-1);
 		return pos;
 	}
 	ContentType remove(Rank i){
 		ContentType result = _elem[i];
-		swap(_elem[i], _elem[--_elem.size]);
+		swap(_elem[i], _elem[--size]);
 		sink(i);
 		return result;
 	}
@@ -75,7 +75,4 @@ public:
 		if(_elem[2*i+1]>=_elem[2*i+2]) return 2*i+1;
 		else return 2*i+2;
 	}
-
-private:
-	vector<ContentType> _elem;
 }
