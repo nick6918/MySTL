@@ -68,7 +68,9 @@ all files in root content are testers for some components. Directories are liste
 I will implemented the following extra more model and project in very recent time.
 
 [] 234 Tree, RB Tree, Map, Set
+
 [] Strings
+
 [] Dynamic programming
 
 ## Special Thanks
@@ -80,7 +82,7 @@ Second Part(http://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184_2X+sp/a
 
 Thanks to this great materials.
 
-The repo has also referenced from the book "The annotated STL sources"(STL源码剖析)(https://book.douban.com/subject/1110934/), the book is written in Chinese. Gread book!!!
+The repo has also referenced from the book "The annotated STL sources"(STL源码剖析)(https://book.douban.com/subject/1110934/), the book is written in Chinese. Great book!!!
 
 ## Contact Me
 
