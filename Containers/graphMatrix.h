@@ -170,25 +170,26 @@ public:
 	}
 	template <typename VST>
 	void dfs_single (int start, VST& visit, int& clock){
-		stack<int> nodes;
-		nodes.push(start);
-		while(!nodes.empty()){
-			int node = nodes.top();
-			nodes.pop();
-			visit(vertexGroup[node]);
-			status(node)=VISITED;
-			fTime(node)=++clock;
-			for(int current=firstNbr(node); current>-1; current=nextNbr(node, current)){
-				if(status(current)==UNDESCOVERED){
-					nodes.push(current);
-					status(current)=DISCOVERED;
-					type(node, current)=TREE;
-					parent(current)=node;
-				}
-				else{
-					type(node, current)=CROSS;
-				}
+		dTime(start) = clock++;
+		status(start) = DISCOVERED;
+		for (int current = firstNbr(start); current > -1; current = nextNbr(start, current) ){
+			switch(status(current)){
+				case UNDISCOVERED:
+					dTime(current) = clock++;
+					status(current) = DISCOVERED;
+					type(start, current) = TREE;
+					dfs_single(current, visit, clock);
+					break;
+				case DISCOVERED:
+					type(start, current) = BACKWARD;
+					break;
+				default:
+					type(start, current) = (dTime(start) <= dTime(current) ? FORWARD : CROSS);
+					break;
 			}
+			visit(start);
+			status(start) = VISITED;
+			fTime(start) = clock++;
 		}
 	}
 	template <typename VST>
